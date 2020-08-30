@@ -528,9 +528,9 @@ button {
 .film-details {
   position: fixed;
   height: 100vh;
+  width: 100%;
   top: 0;
-  right: 0;
-  left: 10%;
+  left: 0;
   z-index: 1;
   background-color: #212126;
   box-shadow: -3px 2px 13px 0 #141628;
@@ -582,7 +582,7 @@ button {
   content: "✕";
   position: absolute;
   left: 0;
-  top: 0;
+  top: 20px;
   font-size: 25px;
   line-height: 1;
   color: #8da5aa;

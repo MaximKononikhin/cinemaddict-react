@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const MovieCard = () => {
   return (
@@ -10,7 +11,9 @@ const MovieCard = () => {
         <span className="film-card__duration">1h 55m</span>
         <span className="film-card__genre">Musical</span>
       </p>
-      <img src="./images/posters/the-dance-of-life.jpg" alt="" className="film-card__poster"/>
+      <Link to='/movie'>
+        <img src="./images/posters/the-dance-of-life.jpg" alt="" className="film-card__poster"/>
+      </Link>
       <p className="film-card__description">Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…</p>
       <a href="/#" className="film-card__comments">5 comments</a>
       <form className="film-card__controls">
