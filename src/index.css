@@ -684,6 +684,7 @@ button {
 .film-details__controls {
   width: 1070px;
   margin: 0 auto;
+  margin-bottom: 20px;
   border-top: 1px solid #31353f;
   border-bottom: 1px solid #31353f;
   padding: 22px 50px;
@@ -785,7 +786,10 @@ button {
   opacity: 1;
 }
 .film-details__comments-wrap {
-  width: 630px;
+  width: 1170px;
+
+  margin: 0 auto;
+
   color: #f6f6f6;
 }
 .film-details__comments-title {
