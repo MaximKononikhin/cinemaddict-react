@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { deleteComment } from '../Store/actions';
+import { deleteComment, loadMovies } from '../Store/actions';
 
 const Comment = (props) => {
   const {comment} = props;
@@ -21,6 +21,7 @@ const Comment = (props) => {
           <button className="film-details__comment-delete" onClick={(evt) => {
             evt.preventDefault();
             dispatch(deleteComment(comment.id));
+            dispatch(loadMovies());
           }}>Delete</button>
         </p>
       </div>

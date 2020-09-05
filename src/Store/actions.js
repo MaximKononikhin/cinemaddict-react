@@ -31,6 +31,7 @@ export const addComment = (comment, movieId) => {
 export const deleteComment = (commentId) => {
   return async (dispatch, getState, api) => {
     const response = await api.delete(`/comments/${commentId}`);
+    console.log(response)
   }
 }
 

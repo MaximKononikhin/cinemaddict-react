@@ -15,7 +15,7 @@ const Main = (props) => {
     <>
       <Header/>
       <main className="main">
-        <MainNavigation/>
+        <MainNavigation movies={movies}/>
         <Sorting/>
         <section className="films">
           <MainMovieList movies={movies}/>
@@ -29,7 +29,7 @@ const Main = (props) => {
           />
         </section>
       </main>
-      <Footer/>
+      <Footer movies={movies}/>
     </>
     
   )

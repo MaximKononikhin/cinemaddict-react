@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({movies}) => {
   return (
     <footer className="footer">
       <h2 className="footer__logo logo logo--smaller">Cinemaddict</h2>
       <section className="footer__statistics">
-        <p>130 291 movies inside</p>
+        <p>{movies.length} movies inside</p>
       </section>
     </footer>
   )

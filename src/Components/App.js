@@ -21,7 +21,6 @@ const App = () => {
         <Route path='/' exact render={() => <Main movies={movies}/>}/>
         <Route path='/movie/:id' exact render={(props) => {
           const selectedMovie = movies.find((movie) => movie.id === props.match.params.id);
-          
           return <MovieDetails movie={selectedMovie}/>
         }}/>
       </Switch>
