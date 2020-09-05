@@ -1,25 +1,66 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { getDuration } from '../utils';
+import { useDispatch } from 'react-redux';
+import { updateMovie } from '../Store/actions';
 
-const MovieCard = () => {
+const MovieCard = (props) => {
+  const {movie} = props;
+  const dispatch = useDispatch();
+
+  if (!movie) {
+    return null;
+  }
+
+  const release = new Date(movie.film_info.release.date);
+
   return (
     <article className="film-card">
-      <h3 className="film-card__title">The Dance of Life</h3>
-      <p className="film-card__rating">8.3</p>
+      <h3 className="film-card__title">{movie.film_info.title}</h3>
+      <p className="film-card__rating">{movie.film_info.total_rating}</p>
       <p className="film-card__info">
-        <span className="film-card__year">1929</span>
-        <span className="film-card__duration">1h 55m</span>
-        <span className="film-card__genre">Musical</span>
+        <span className="film-card__year">{release.getFullYear()}</span>
+        <span className="film-card__duration">{getDuration(movie.film_info.runtime)}</span>
+        <span className="film-card__genre">{movie.film_info.genre[0]}</span>
       </p>
-      <Link to='/movie'>
-        <img src="./images/posters/the-dance-of-life.jpg" alt="" className="film-card__poster"/>
+      <Link to={`/movie/${movie.id}`}>
+        <img src={movie.film_info.poster} alt="" className="film-card__poster"/>
       </Link>
-      <p className="film-card__description">Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…</p>
-      <a href="/#" className="film-card__comments">5 comments</a>
-      <form className="film-card__controls">
-        <button className="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
-        <button className="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
-        <button className="film-card__controls-item button film-card__controls-item--favorite">Mark as favorite</button>
+      <p className="film-card__description">{movie.film_info.description.length > 140 ? ``.concat(movie.film_info.description.slice(0, 139), `...`) : movie.film_info.description}</p>
+      <Link to={`/movie/${movie.id}`} className="film-card__comments">{movie.comments.length} comments</Link>
+      <form className="film-card__controls" onClick={(evt) => {
+        evt.preventDefault()
+      }}>
+        <button className={`film-card__controls-item button film-card__controls-item--add-to-watchlist ${movie.user_details.watchlist ? `film-card__controls-item--active` : ``}`} onClick={() => {
+          const newMovie = {
+            ...movie,
+            user_details: {
+              ...movie.user_details,
+              watchlist: !movie.user_details.watchlist
+            }
+          }
+          dispatch(updateMovie(newMovie));
+        }}>Add to watchlist</button>
+        <button className={`film-card__controls-item button film-card__controls-item--mark-as-watched ${movie.user_details.already_watched ? `film-card__controls-item--active` : ``}`} onClick={() => {
+          const newMovie = {
+            ...movie,
+            user_details: {
+              ...movie.user_details,
+              already_watched: !movie.user_details.already_watched
+            }
+          }
+          dispatch(updateMovie(newMovie));
+        }}>Mark as watched</button>
+        <button className={`film-card__controls-item button film-card__controls-item--favorite ${movie.user_details.favorite ? `film-card__controls-item--active` : ``}`} onClick={() => {
+          const newMovie = {
+            ...movie,
+            user_details: {
+              ...movie.user_details,
+              favorite: !movie.user_details.favorite
+            }
+          }
+          dispatch(updateMovie(newMovie))
+        }}>Mark as favorite</button>
       </form>
     </article>
   )

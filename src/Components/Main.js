@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Header from './Header';
 import MainNavigation from './Main-navigation';
@@ -6,19 +6,10 @@ import Sorting from './Sorting';
 import MainMovieList from './Main-movie-list';
 import ExtraList from './Extra-list';
 import Footer from './Footer';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadMovies } from '../Store/actions';
 
-const Main = () => {
-  const movies = useSelector(state => state.movies);
+const Main = (props) => {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadMovies())
-  }, [dispatch]);
-
-  console.log(movies)
+  const {movies} = props;
 
   return (
     <>
@@ -27,9 +18,15 @@ const Main = () => {
         <MainNavigation/>
         <Sorting/>
         <section className="films">
-          <MainMovieList/>
-          <ExtraList title={`Top rated`}/>
-          <ExtraList title={`Most commented`}/>
+          <MainMovieList movies={movies}/>
+          <ExtraList
+            title={`Top rated`}
+            movies={[...movies].sort((a, b) => b.film_info.total_rating - a.film_info.total_rating).slice(0, 2)}
+          />
+          <ExtraList 
+            title={`Most commented`} 
+            movies={[...movies].sort((a, b) => b.comments.length - a.comments.length).slice(0, 2)}
+          />
         </section>
       </main>
       <Footer/>
