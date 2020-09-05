@@ -20,4 +20,31 @@ export const getRating = (moviesLength) => {
     rank = `Movie Buff`;
   }
   return rank;
+};
+
+export const filterMovies = (movie, filterType) => {
+  switch (filterType) {
+    case `watchlist`:
+      return movie.user_details.watchlist;
+    
+    case `watched`:
+      return movie.user_details.already_watched;
+
+    case `favorite`:
+      return movie.user_details.favorite;
+      
+    default: return movie;
+  }
+};
+
+export const sortMovies = (a, b, sortType) => {
+  switch (sortType) {
+    case `rating`:
+      return b.film_info.total_rating - a.film_info.total_rating;
+
+    case `date`:
+      return Date.parse(a.film_info.release.date) - Date.parse(b.film_info.release.date);
+
+    default: return a;
+  }
 }
