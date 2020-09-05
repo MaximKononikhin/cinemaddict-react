@@ -93,42 +93,39 @@ const MovieDetails = (props) => {
 
           <section className="film-details__controls">
             <input type="checkbox" className="film-details__control-input visually-hidden" id="watchlist" name="watchlist" defaultChecked={movie.user_details.watchlist} onClick={() => {
-              const newMovie = {
+              dispatch(updateMovie({
                 ...movie,
                 user_details: {
                   ...movie.user_details,
                   watchlist: !movie.user_details.watchlist
                 }
-              }
-              dispatch(updateMovie(newMovie));
+              }));
             }}/>
             <label htmlFor="watchlist" className={`film-details__control-label film-details__control-label--watchlist`}>
               Add to watchlist
             </label>
 
             <input type="checkbox" className="film-details__control-input visually-hidden" id="watched" name="watched" defaultChecked={movie.user_details.already_watched} onClick={() => {
-              const newMovie = {
+              dispatch(updateMovie({
                 ...movie,
                 user_details: {
                   ...movie.user_details,
                   already_watched: !movie.user_details.already_watched
                 }
-              }
-              dispatch(updateMovie(newMovie));
+              }));
             }}/>
             <label htmlFor="watched" className={`film-details__control-label film-details__control-label--watched`}>
               Already watched
             </label>
 
             <input type="checkbox" className="film-details__control-input visually-hidden" id="favorite" name="favorite" defaultChecked={movie.user_details.favorite} onClick={() => {
-              const newMovie = {
+              dispatch(updateMovie({
                 ...movie,
                 user_details: {
                   ...movie.user_details,
                   favorite: !movie.user_details.favorite
                 }
-              }
-              dispatch(updateMovie(newMovie))
+              }))
             }}/>
             <label htmlFor="favorite" className={`film-details__control-label film-details__control-label--favorite`}>
               Add to favorites
@@ -138,7 +135,7 @@ const MovieDetails = (props) => {
 
         <div className="htmlForm-details__bottom-container">
           <section className="film-details__comments-wrap">
-            <h3 className="film-details__comments-title">Comments <span className="film-details__comments-count">{movie.comments.length}</span></h3>
+            <h3 className="film-details__comments-title">Comments <span className="film-details__comments-count">{comments.length}</span></h3>
 
             <ul className="film-details__comments-list">
               {comments.map((comment, index) => <Comment comment={comment} key={`id${comment.id}`}/>)}

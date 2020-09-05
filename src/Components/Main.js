@@ -13,7 +13,7 @@ const Main = (props) => {
 
   return (
     <>
-      <Header/>
+      <Header moviesLength={movies.filter(movie => movie.user_details.already_watched).length}/>
       <main className="main">
         <MainNavigation movies={movies}/>
         <Sorting/>

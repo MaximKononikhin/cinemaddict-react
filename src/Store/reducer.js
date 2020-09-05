@@ -1,13 +1,15 @@
-import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE } from "./actionTypes";
+import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES } from "./actionTypes";
 import { updateMovie } from "../utils";
 
 const initialState = {
   movies: [],
   comments: [],
+  activeFilter: `all`,
   shownMoviesCount: 5
 };
 
 export const reducer = (state = initialState, action) => {
+
   switch (action.type) {
     case LOAD_MOVIES:
       return {
@@ -31,6 +33,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         movies: updateMovie(state.movies, action.payload)
+      }
+
+    case FILTER_MOVIES: 
+      return {
+        ...state,
+        activeFilter: action.payload
       }
     
     default: return state;

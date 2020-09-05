@@ -1,4 +1,4 @@
-import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE } from "./actionTypes";
+import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES } from "./actionTypes";
 
 export const loadMovies = () => {
   return async(dispatch, getState, api) => {
@@ -30,8 +30,7 @@ export const addComment = (comment, movieId) => {
 
 export const deleteComment = (commentId) => {
   return async (dispatch, getState, api) => {
-    const response = await api.delete(`/comments/${commentId}`);
-    console.log(response)
+    api.delete(`/comments/${commentId}`);
   }
 }
 
@@ -60,4 +59,11 @@ export const updateMovieAction = (movie) => {
     type: UPDATE_MOVIE,
     payload: movie
   }
-}
+};
+
+export const filterMoviesAction = (filterType = `all`) => {
+  return {
+    type: FILTER_MOVIES,
+    payload: filterType
+  }
+};

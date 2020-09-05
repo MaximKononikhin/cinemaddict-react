@@ -32,34 +32,31 @@ const MovieCard = (props) => {
         evt.preventDefault()
       }}>
         <button className={`film-card__controls-item button film-card__controls-item--add-to-watchlist ${movie.user_details.watchlist ? `film-card__controls-item--active` : ``}`} onClick={() => {
-          const newMovie = {
+          dispatch(updateMovie({
             ...movie,
             user_details: {
               ...movie.user_details,
               watchlist: !movie.user_details.watchlist
             }
-          }
-          dispatch(updateMovie(newMovie));
+          }));
         }}>Add to watchlist</button>
         <button className={`film-card__controls-item button film-card__controls-item--mark-as-watched ${movie.user_details.already_watched ? `film-card__controls-item--active` : ``}`} onClick={() => {
-          const newMovie = {
+          dispatch(updateMovie({
             ...movie,
             user_details: {
               ...movie.user_details,
               already_watched: !movie.user_details.already_watched
             }
-          }
-          dispatch(updateMovie(newMovie));
+          }));
         }}>Mark as watched</button>
         <button className={`film-card__controls-item button film-card__controls-item--favorite ${movie.user_details.favorite ? `film-card__controls-item--active` : ``}`} onClick={() => {
-          const newMovie = {
+          dispatch(updateMovie({
             ...movie,
             user_details: {
               ...movie.user_details,
               favorite: !movie.user_details.favorite
             }
-          }
-          dispatch(updateMovie(newMovie))
+          }))
         }}>Mark as favorite</button>
       </form>
     </article>
