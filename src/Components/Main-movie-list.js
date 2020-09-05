@@ -8,6 +8,7 @@ const MainMovieList = (props) => {
 
   const movieCount = useSelector(state => state.shownMoviesCount);
   const activeFilter = useSelector(state => state.activeFilter);
+  const activeSortType = useSelector(state => state.activeSortingType);
 
   return (
     <section className="films-list">
@@ -29,7 +30,19 @@ const MainMovieList = (props) => {
               
             default: return movie;
           }
-        }).slice(0, movieCount).map((movie) => <MovieCard movie={movie} key={`id${movie.id}`}/>)}
+        })
+        .sort((a, b) => {
+          switch (activeSortType) {
+            case `rating`:
+              return b.film_info.total_rating - a.film_info.total_rating;
+
+            case `date`:
+              return Date.parse(a.film_info.release.date) - Date.parse(b.film_info.release.date);
+
+            default: return a;
+          }
+        })
+        .slice(0, movieCount).map((movie) => <MovieCard movie={movie} key={`id${movie.id}`}/>)}
       </div>
       {movies.length >= movieCount? <ShowMoreBtn/> : null}
     </section>
