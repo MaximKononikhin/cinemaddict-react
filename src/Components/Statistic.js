@@ -1,14 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+
 import Header from './Header';
-import { getRating, getMostPopularGenre, getHours, getMinRemainder, getGenres } from '../utils';
+import { getRating, getMostPopularGenre, getHours, getMinRemainder, renderChart } from '../utils';
 
 const Statistic = ({movies}) => {
-  const canvasRef = useRef(null);
-
   const watchedMovies = movies.filter(movie => movie.user_details.already_watched);
   const watchedMoviesTotalDuration = watchedMovies.reduce((sum, current) => {
     return sum + current.film_info.runtime;
   }, 0);
+
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    renderChart(canvasRef.current, watchedMovies)
+  });
 
   return (
     <>

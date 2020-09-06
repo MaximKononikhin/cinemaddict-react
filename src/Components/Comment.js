@@ -1,12 +1,13 @@
 import React from 'react';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import { deleteComment, loadMovies } from '../Store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteComment, loadMovies, switchLoaderAction } from '../Store/actions';
 
 const Comment = (props) => {
   const {comment} = props;
 
   const dispatch = useDispatch();
+  const isFetching = useSelector(state => state.isFetching);
 
   return (
     <li className="film-details__comment">
@@ -20,9 +21,10 @@ const Comment = (props) => {
           <span className="film-details__comment-day">{moment(comment.date).format('YYYY/MM/DD HH:mm')}</span>
           <button className="film-details__comment-delete" onClick={(evt) => {
             evt.preventDefault();
+            dispatch(switchLoaderAction(true));
             dispatch(deleteComment(comment.id));
             dispatch(loadMovies());
-          }}>Delete</button>
+          }}>{isFetching ? `Deleting...` : `Delete`}</button>
         </p>
       </div>
     </li>

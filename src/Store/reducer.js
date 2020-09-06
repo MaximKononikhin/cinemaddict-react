@@ -1,4 +1,4 @@
-import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES, SORT_MOVIES } from "./actionTypes";
+import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES, SORT_MOVIES, SWITCH_LOADER } from "./actionTypes";
 import { updateMovie } from "../utils";
 
 const initialState = {
@@ -6,7 +6,8 @@ const initialState = {
   comments: [],
   activeFilter: `all`,
   shownMoviesCount: 5,
-  activeSortingType: `default`
+  activeSortingType: `default`,
+  isFetching: true
 };
 
 export const reducer = (state = initialState, action) => {
@@ -46,6 +47,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeSortingType: action.payload
+      }
+
+    case SWITCH_LOADER:
+      return {
+        ...state,
+        isFetching: action.payload
       }
 
     

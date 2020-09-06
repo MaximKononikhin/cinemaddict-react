@@ -1,9 +1,10 @@
-import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES, SORT_MOVIES } from "./actionTypes";
+import { LOAD_MOVIES, LOAD_COMMENTS, SHOW_MORE_MOVIES, UPDATE_MOVIE, FILTER_MOVIES, SORT_MOVIES, SWITCH_LOADER } from "./actionTypes";
 
 export const loadMovies = () => {
   return async(dispatch, getState, api) => {
     const response = await api.get(`/movies`);
     dispatch(loadMoviesAction(response.data));
+    dispatch(switchLoaderAction(false));
   }
 };
 
@@ -73,5 +74,12 @@ export const sortMoviesAction = (sortingType = `default`) => {
   return {
     type: SORT_MOVIES,
     payload: sortingType
+  }
+};
+
+export const switchLoaderAction = (flag) => {
+  return {
+    type: SWITCH_LOADER,
+    payload: flag
   }
 };

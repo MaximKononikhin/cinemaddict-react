@@ -6,10 +6,17 @@ import Sorting from './Sorting';
 import MainMovieList from './Main-movie-list';
 import ExtraList from './Extra-list';
 import Footer from './Footer';
+import Loader from './Loader';
+import { useSelector } from 'react-redux';
 
 const Main = (props) => {
-
   const {movies} = props;
+
+  const isFetching = useSelector(state => state.isFetching);
+
+  if (isFetching) {
+    return <Loader/>
+  }
 
   return (
     <>
