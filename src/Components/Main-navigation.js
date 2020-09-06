@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterMoviesAction } from '../Store/actions';
+import { Link } from 'react-router-dom';
 
 const MainNavigation = ({movies}) => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const MainNavigation = ({movies}) => {
           dispatch(filterMoviesAction(`favorite`));
         }}>Favorites <span className="main-navigation__item-count">{movies.filter(movie => movie.user_details.favorite).length}</span></a>
       </div>
-      <a href="#stats" className="main-navigation__additional">Stats</a>
+      <Link to="/statistic" className="main-navigation__additional">Stats</Link>
     </nav>
   )
 };

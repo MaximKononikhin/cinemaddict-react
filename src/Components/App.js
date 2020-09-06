@@ -5,6 +5,7 @@ import Main from './Main';
 import MovieDetails from './Movie-details';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadMovies } from '../Store/actions';
+import Statistic from './Statistic';
 
 const App = () => {
   const movies = useSelector(state => state.movies);
@@ -23,6 +24,7 @@ const App = () => {
           const selectedMovie = movies.find((movie) => movie.id === props.match.params.id);
           return <MovieDetails movie={selectedMovie}/>
         }}/>
+        <Route path='/statistic' exact render={() => <Statistic movies={movies}/>}/>
       </Switch>
     </Router>
   )

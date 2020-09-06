@@ -2,6 +2,14 @@ export const getDuration = (duration) => {
   return `${Math.floor(duration / 60)}h ${Math.floor(duration % 60)}min`;
 };
 
+export const getHours = (duration) => {
+  return Math.floor(duration / 60);
+}
+
+export const getMinRemainder = (duration) => {
+  return Math.floor(duration % 60);
+}
+
 export const updateMovie = (movies, movie) => {
   const index = movies.findIndex((it) => it.id === movie.id);
   if (index === -1) {
@@ -47,4 +55,24 @@ export const sortMovies = (a, b, sortType) => {
 
     default: return a;
   }
+};
+
+export const getMostPopularGenre = (movies) => {
+  let arr = [];
+
+  movies.forEach((movie) => {
+    movie.film_info.genre.forEach((elem) => arr.push(elem))
+  });
+
+  return arr.sort((a,b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop();
+}
+
+export const getGenres = (movies) => {
+  let arr = [];
+
+  movies.forEach((movie) => {
+    movie.film_info.genre.forEach((elem) => arr.push(elem))
+  });
+
+  return new Set(arr);
 }
