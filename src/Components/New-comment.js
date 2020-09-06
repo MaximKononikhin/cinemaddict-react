@@ -66,7 +66,9 @@ const NewComment = ({movieId}) => {
       </label>
       <button className="film-details__send-btn" onClick={(evt) => {
         evt.preventDefault();
-        dispatchRedux(addComment(state, movieId));
+        if (state.comment !== ``) {
+          dispatchRedux(addComment(state, movieId));
+        }
       }}>Send</button>
   </div>
   )
